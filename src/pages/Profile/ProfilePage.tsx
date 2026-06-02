@@ -1,4 +1,4 @@
-import { ShieldCheck, LockKeyhole, Mail, Save, UserRound } from "lucide-react";
+import { LockKeyhole, Mail, Save, UserRound } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { MainLayout } from "../../layouts/MainLayout";
 import { getCurrentUserProfile, updateCurrentUserProfile } from "../../mock/user";

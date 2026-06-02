@@ -9,7 +9,7 @@ import { TripsPage } from "../pages/Trips/TripsPage.tsx";
 
 export function AppRoutes() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/ihc-prototipo">
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
