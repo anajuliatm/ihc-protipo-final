@@ -5,6 +5,7 @@ import { LockKeyhole, Mail, User } from "lucide-react";
 import "../../styles/login-page.css";
 
 export function LoginPage() {
+  const logoUrl = `${import.meta.env.BASE_URL}logo.png`;
   const navigate = useNavigate();
   const [mode, setMode] = useState<"login" | "register">("login");
   const [username, setUsername] = useState("");
@@ -20,7 +21,7 @@ export function LoginPage() {
     <div className="login-page">
       <section className="login-card" aria-label="Formulario de login">
         <div className="login-card__brand">
-          <img src="/logo.png" alt="Trippi" className="login-card__logo" />
+          <img src={logoUrl} alt="Trippi" className="login-card__logo" />
         </div>
 
         <div className="login-card__tabs" role="tablist" aria-label="Acesso da conta">

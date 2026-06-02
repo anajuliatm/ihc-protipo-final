@@ -3,12 +3,13 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "../../styles/sidebar.css";
 
 export function Sidebar() {
+  const logoUrl = `${import.meta.env.BASE_URL}logo-ico.png`;
   const navigate = useNavigate();
 
   return (
     <aside className="sidebar">
       <div className="sidebar__logo">
-        <img src="/logo-ico.png" alt="Trippi" className="sidebar__logo-img" />
+        <img src={logoUrl} alt="Trippi" className="sidebar__logo-img" />
       </div>
 
       <nav className="sidebar__nav">

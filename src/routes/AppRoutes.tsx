@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import { DashboardPage } from "../pages/Dashboard/DashboardPage.tsx";
 import { FinancePage } from "../pages/Finance/FinancePage.tsx";
@@ -9,7 +9,7 @@ import { TripsPage } from "../pages/Trips/TripsPage.tsx";
 
 export function AppRoutes() {
   return (
-    <BrowserRouter basename="/ihc-prototipo">
+    <HashRouter>
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
@@ -18,6 +18,6 @@ export function AppRoutes() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/trip/:id" element={<TripDetailsPage />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
