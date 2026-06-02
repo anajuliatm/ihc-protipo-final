@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "../../styles/sidebar.css";
 
 export function Sidebar() {
-  const logoUrl = `${import.meta.env.BASE_URL}logo-ico.png`;
+  const logoUrl = `${import.meta.env.BASE_URL}logo-ico.png?v=20260602`;
   const navigate = useNavigate();
 
   return (

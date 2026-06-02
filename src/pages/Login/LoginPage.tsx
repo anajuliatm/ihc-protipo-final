@@ -5,7 +5,7 @@ import { LockKeyhole, Mail, User } from "lucide-react";
 import "../../styles/login-page.css";
 
 export function LoginPage() {
-  const logoUrl = `${import.meta.env.BASE_URL}logo.png`;
+  const logoUrl = `${import.meta.env.BASE_URL}logo.png?v=20260602`;
   const navigate = useNavigate();
   const [mode, setMode] = useState<"login" | "register">("login");
   const [username, setUsername] = useState("");
