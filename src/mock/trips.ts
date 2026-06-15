@@ -131,7 +131,7 @@ export const trips: Trip[] = [
     endDate: "2026-08-11",
     status: "active",
     budget: 12000,
-    spent: 5400,
+    spent: 15000,
     itinerary: [
       {
         date: "2026-08-10",

@@ -211,7 +211,9 @@ function FinanceSummary({ trip, onEditBudget }: { trip: Trip; onEditBudget: () =
 
         <article className="trip-finance__card trip-finance__card--remaining">
           <p>Saldo restante</p>
-          <strong>{formatCurrency(remaining)}</strong>
+          <strong className={remaining < 0 ? "is-negative" : "is-positive"}>
+            {formatCurrency(remaining)}
+          </strong>
         </article>
       </div>
 
