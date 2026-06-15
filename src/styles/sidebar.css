@@ -37,6 +37,7 @@
 }
 
 .menu-item {
+  position: relative;
   display: flex;
   gap: 12px;
   align-items: center;
@@ -45,18 +46,58 @@
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(12px);
   border: 1px solid transparent;
+  color: rgba(226, 232, 240, 0.78);
+  font-weight: 500;
+  overflow: hidden;
   transition: border-color 180ms ease, background-color 180ms ease,
-    transform 180ms ease;
+    color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.menu-item svg {
+  flex-shrink: 0;
+  color: rgba(191, 219, 254, 0.78);
+  transition: color 180ms ease;
+}
+
+.menu-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 4px;
+  border-radius: 0 999px 999px 0;
+  background: var(--primary-light);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 180ms ease, transform 180ms ease;
 }
 
 .menu-item:hover {
   background: rgba(37, 99, 235, 0.18);
+  color: #f8fbff;
   transform: translateX(2px);
 }
 
+.menu-item:hover svg {
+  color: #dbeafe;
+}
+
 .menu-item.is-active {
-  background: linear-gradient(150deg, rgba(37, 99, 235, 0.4), rgba(30, 64, 175, 0.3));
+  background: linear-gradient(150deg, rgba(37, 99, 235, 0.52), rgba(30, 64, 175, 0.34));
+  border-color: rgba(147, 197, 253, 0.56);
+  color: #f8fbff;
+  font-weight: 700;
   box-shadow: 0 12px 28px rgba(8, 20, 38, 0.45);
+}
+
+.menu-item.is-active svg {
+  color: #bfdbfe;
+}
+
+.menu-item.is-active::before {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .menu-item--logout {
