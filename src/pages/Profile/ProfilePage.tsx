@@ -29,8 +29,8 @@ export function ProfilePage() {
     <MainLayout>
       <div className="profile-page">
         <section className="profile-hero">
-          <h1>Seu perfil</h1>
-          <p>Visualize e edite suas informações de acesso.</p>
+          <h1>Perfil</h1>
+          <p>Revise e atualize seu usuário, email e senha de acesso ao sistema.</p>
         </section>
 
         <div className="profile-grid">
@@ -48,7 +48,7 @@ export function ProfilePage() {
 
           <section className="profile-form-card">
             <div className="profile-form-card__header">
-              <h2>Editar Perfil</h2>
+              <h2>Editar dados de acesso</h2>
             </div>
 
             <form className="profile-form" onSubmit={handleSubmit}>
