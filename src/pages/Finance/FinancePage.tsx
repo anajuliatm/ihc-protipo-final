@@ -111,7 +111,8 @@ export function FinancePage() {
     <MainLayout>
       <div className="finance-page">
         <header className="finance-page__header">
-          <h1>Financeiro</h1>
+          <h1>Controle Financeiro das Viagens</h1>
+          <p>Acompanhe sua contribuição, seus gastos e os acertos pendentes nas viagens ativas.</p>
         </header>
 
         <section className="finance-kpis">

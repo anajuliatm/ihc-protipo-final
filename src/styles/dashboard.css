@@ -4,8 +4,18 @@
   gap: clamp(24px, 3vw, 36px);
 }
 
+.dashboard__header {
+  display: grid;
+  gap: 8px;
+  max-width: 720px;
+}
+
 .dashboard__title {
   font-size: 42px;
+}
+
+.dashboard__header p {
+  color: rgba(226, 232, 240, 0.8);
 }
 
 .dashboard__trips {

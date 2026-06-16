@@ -1,10 +1,11 @@
 import { LayoutDashboard, Wallet, Plane, LogOut, UserRound } from "lucide-react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "../../styles/sidebar.css";
 
 export function Sidebar() {
   const logoUrl = `${import.meta.env.BASE_URL}logo-ico.png?v=20260602`;
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   return (
     <aside className="sidebar">
@@ -14,7 +15,12 @@ export function Sidebar() {
 
       <nav className="sidebar__nav">
         <MenuItem icon={<LayoutDashboard />} label="Dashboard" to="/dashboard" end />
-        <MenuItem icon={<Plane />} label="Viagens" to="/trips" />
+        <MenuItem
+          icon={<Plane />}
+          label="Viagens"
+          to="/trips"
+          isActive={pathname.startsWith("/trips") || pathname.startsWith("/trip/")}
+        />
         <MenuItem icon={<Wallet />} label="Financeiro" to="/finance" />
         <MenuItem icon={<UserRound />} label="Perfil" to="/profile" />
       </nav>
@@ -38,15 +44,18 @@ interface MenuItemProps {
   label: string;
   to?: string;
   end?: boolean;
+  isActive?: boolean;
 }
 
-function MenuItem({ icon, label, to, end }: MenuItemProps) {
+function MenuItem({ icon, label, to, end, isActive }: MenuItemProps) {
   if (to) {
     return (
       <NavLink
         to={to}
         end={end}
-        className={({ isActive }) => `menu-item${isActive ? " is-active" : ""}`}
+        className={({ isActive: navLinkIsActive }) =>
+          `menu-item${isActive || navLinkIsActive ? " is-active" : ""}`
+        }
       >
         {icon}
         <span>{label}</span>

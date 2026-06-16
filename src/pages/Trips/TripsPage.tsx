@@ -87,7 +87,8 @@ export function TripsPage() {
     <MainLayout>
       <div className="trips-page">
         <header className="trips-page__header">
-          <h1>Todas as viagens</h1>
+          <h1>Minhas Viagens</h1>
+          <p>Consulte  e crie viagens.</p>
         </header>
 
         <div className="trips-tabs" role="tablist" aria-label="Filtrar viagens por status">

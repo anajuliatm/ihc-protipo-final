@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowDownLeft, ArrowUpRight, CalendarDays, Clock3, MapPin, Pencil, Plus, Trash2, Users } from "lucide-react";
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BackButton } from "../../components/common/BackButton";
 import { Modal } from "../../components/common/Modal";
@@ -79,8 +79,8 @@ function createParticipantUsers(participantsCount: number) {
 }
 
 const TAB_LABELS: Record<DetailTab, string> = {
-  overview: "Overview",
-  finance: "Financeiro",
+  overview: "Visao geral",
+  finance: "Gastos",
   itinerary: "Roteiro",
 };
 
@@ -191,7 +191,7 @@ function FinanceSummary({ trip, onEditBudget }: { trip: Trip; onEditBudget: () =
 
   return (
     <section className="trip-finance">
-      <h2 className="trip-section-title">Financeiro</h2>
+      <h2 className="trip-section-title">Gastos e Orçamento da Viagem</h2>
 
       <div className="trip-finance__grid">
         <article className="trip-finance__card trip-finance__card--budget">
@@ -211,13 +211,15 @@ function FinanceSummary({ trip, onEditBudget }: { trip: Trip; onEditBudget: () =
 
         <article className="trip-finance__card trip-finance__card--remaining">
           <p>Saldo restante</p>
-          <strong>{formatCurrency(remaining)}</strong>
+          <strong className={remaining < 0 ? "is-negative" : "is-positive"}>
+            {formatCurrency(remaining)}
+          </strong>
         </article>
       </div>
 
       <section className="trip-finance__entries" aria-label="Lancamentos da viagem">
         <div className="trip-section__header">
-          <h3 className="trip-finance__entries-title">Lancamentos da viagem</h3>
+          <h3 className="trip-finance__entries-title">Lançamentos Financeiros</h3>
         </div>
 
         {financeEntries.length > 0 ? (
@@ -275,15 +277,8 @@ function ItineraryTabs({
 
   const [activeDayIndex, setActiveDayIndex] = useState(0);
 
-  useEffect(() => {
-    if (activeDayIndex <= itineraryDates.length - 1) {
-      return;
-    }
-
-    setActiveDayIndex(0);
-  }, [activeDayIndex, itineraryDates.length]);
-
-  const activeDate = itineraryDates[activeDayIndex] ?? itineraryDates[0];
+  const safeActiveDayIndex = Math.min(activeDayIndex, Math.max(itineraryDates.length - 1, 0));
+  const activeDate = itineraryDates[safeActiveDayIndex] ?? itineraryDates[0];
   const activeDay = trip.itinerary.find((day) => day.date === activeDate);
 
   return (
@@ -298,7 +293,7 @@ function ItineraryTabs({
           <button
             type="button"
             key={date}
-            className={`trip-itinerary__tab ${activeDayIndex === index ? "is-active" : ""}`}
+            className={`trip-itinerary__tab ${safeActiveDayIndex === index ? "is-active" : ""}`}
             onClick={() => setActiveDayIndex(index)}
           >
             {formatDate(date)}
@@ -384,7 +379,7 @@ export function TripDetailsPage() {
     return getTripById(tripId);
   }, [tripId]);
 
-  const [tripData, setTripData] = useState<Trip | null>(trip ?? null);
+  const [tripData, setTripData] = useState<Trip | null>(() => trip ?? null);
   const [isOverviewEditOpen, setIsOverviewEditOpen] = useState(false);
   const [isTripDeleteOpen, setIsTripDeleteOpen] = useState(false);
   const [isBudgetEditOpen, setIsBudgetEditOpen] = useState(false);
@@ -396,7 +391,9 @@ export function TripDetailsPage() {
     endDate: "",
   });
 
-  const [participantsUsers, setParticipantsUsers] = useState<string[]>([]);
+  const [participantsUsers, setParticipantsUsers] = useState<string[]>(() =>
+    trip ? createParticipantUsers(trip.participants) : []
+  );
   const [participantInput, setParticipantInput] = useState("");
   const [budgetDraftValue, setBudgetDraftValue] = useState("0");
 
@@ -412,19 +409,6 @@ export function TripDetailsPage() {
   });
   const [editingActivityRef, setEditingActivityRef] = useState<EditingActivityRef | null>(null);
   const [pendingDeleteRef, setPendingDeleteRef] = useState<EditingActivityRef | null>(null);
-
-  useEffect(() => {
-    setTripData(trip ?? null);
-  }, [trip]);
-
-  useEffect(() => {
-    if (!trip) {
-      setParticipantsUsers([]);
-      return;
-    }
-
-    setParticipantsUsers(createParticipantUsers(trip.participants));
-  }, [trip]);
 
   const itineraryDates = useMemo(() => {
     if (!tripData) {
@@ -608,7 +592,7 @@ export function TripDetailsPage() {
       <MainLayout>
         <div className="trip-details-empty">
           <h1>Viagem nao encontrada</h1>
-          <p>Confira o link e selecione uma viagem valida no dashboard.</p>
+          <p>Confira o link ou volte para a lista de viagens para escolher uma viagem valida.</p>
           <BackButton className="trip-details-empty__link" />
         </div>
       </MainLayout>

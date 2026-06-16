@@ -268,6 +268,14 @@
   font-size: clamp(26px, 2.2vw, 34px);
 }
 
+.trip-finance__card strong.is-positive {
+  color: #86efac;
+}
+
+.trip-finance__card strong.is-negative {
+  color: #fca5a5;
+}
+
 .trip-finance__card--spent {
   border-color: rgba(248, 113, 113, 0.42);
 }

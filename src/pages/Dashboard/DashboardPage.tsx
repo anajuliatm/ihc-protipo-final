@@ -15,7 +15,9 @@ export function DashboardPage() {
   return (
     <MainLayout>
       <div className="dashboard">
-        <h1 className="dashboard__title">Próximas viagens</h1>
+        <header className="dashboard__header">
+          <h1 className="dashboard__title">Próximas viagens</h1>
+        </header>
 
         <div className="dashboard__trips">
           {activeTrips.map((trip) => (
